@@ -5,6 +5,7 @@ export const globalStyles = globalCss({ // O globalCss Vem do arquivo que export
     '*':{
         margin:0,
         padding: 0,
+        boxSizing: 'border-box'
     },
 
     body:{
