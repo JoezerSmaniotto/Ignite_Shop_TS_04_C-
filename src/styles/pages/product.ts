@@ -10,7 +10,7 @@ export const ProductContainer = styled('main',{
     margin: '0 auto',
 
 
-})
+});
 
 export const ImageContainer = styled('div',{
     width: '100%',
@@ -29,7 +29,7 @@ export const ImageContainer = styled('div',{
     }
 
      
-})
+});
 
 export const ProductDetails = styled('div',{
     display: 'flex',
@@ -75,4 +75,4 @@ export const ProductDetails = styled('div',{
         }
     },
 
-})
+});

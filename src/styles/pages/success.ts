@@ -35,7 +35,7 @@ export const SuccessContainer  = styled('main', {
         color: '$green300',
         }
     }
-})
+});
 
 export const ImageContainer = styled('div',{
     width: '100%',
@@ -54,4 +54,4 @@ export const ImageContainer = styled('div',{
     img: {
         objectFit: 'cover',
     }
-})
+});
