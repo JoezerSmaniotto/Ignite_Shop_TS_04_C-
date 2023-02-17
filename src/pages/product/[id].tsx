@@ -1,9 +1,11 @@
+import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
+import Head from "next/head";
+import { useState } from "react";
 import Stripe from "stripe"
-
-import { ImageContainer, ProductContainer, ProductDetails } from '../../styles/pages/product';
 import { stripe } from '../../lib/stripe';
+import { ImageContainer, ProductContainer, ProductDetails } from '../../styles/pages/product';
 
 
 interface ProductProps {
@@ -13,14 +15,39 @@ interface ProductProps {
     imageUrl: string;
     price: string;
     description: string;
+    defaultPriceId: string;
   }
 }
 
 
 export default function Product({product}:ProductProps){
-  
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
+
+  async function handleBuyButton() {
+    try {
+      setIsCreatingCheckoutSession(true);
+
+      const response = await axios.post('/api/checkout', {
+        priceId: product.defaultPriceId,
+      })
+      // Gera o retorno da rota /api/checkout, que é uma link e redireiciona para lá,para neste caso concluir a compra
+      const { checkoutUrl } = response.data;
+      // Rota externa
+      window.location.href = checkoutUrl;
+    } catch (err) {
+      // Conectar com uma ferramenta de observabilidade (Datadod / Sentry)
+      console.log("err:", err)
+      setIsCreatingCheckoutSession(false);
+
+      alert('Falha ao redirecionar ao checkout!')
+    }
+  }
 
     return (
+      <>
+        <Head>
+          <title>{product.name}| Ignite Shop</title>
+        </Head>
         <ProductContainer>
             <ImageContainer>
                 <Image src={product.imageUrl} width={520} height={480} alt=""/>
@@ -30,9 +57,13 @@ export default function Product({product}:ProductProps){
                 <span>{product.price}</span>
 
                 <p>{product.description}</p>
-                <button>Comprar agora</button>
+
+                <button disabled={isCreatingCheckoutSession} onClick={handleBuyButton}>
+                  Comprar agora
+                </button>
             </ProductDetails>
         </ProductContainer>
+      </>
     )
 }
 
@@ -45,7 +76,7 @@ paramemtros/IDS, necessários ,
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [
-        {params: {id: 'prod_NMrXKPyUoSSpgC'}},
+        {params: {id: 'prod_NNIaQYqGC5Bg3w'}},
     ],
     fallback: 'blocking',
   }
