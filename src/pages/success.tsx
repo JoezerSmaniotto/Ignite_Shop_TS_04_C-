@@ -43,7 +43,7 @@ export default function Success({ costumerName, product }: SuccessProps) {
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   if (!query.session_id) { // Caso não tenha o session_id, mando para o home.
-    return {
+    return { // Redirecionamento pelo  getServerSideProps
       redirect: {
         destination: '/',
         permanent: false,
@@ -61,7 +61,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   });
 
   const costumerName = session.customer_details.name;
-  const product = session.line_items.data[0].price.product as Stripe.Product; 
+  const product = session.line_items.data[0].price.product as Stripe.Product; // CARINHO Projeto: 4 seção: Produto & Checkout  aula Dados da compra no sucesso 10:40
   /* Normalmente é uma string pq é o ID, mas quando expando para pegar os dados 
   do produto, então ele é um OBj tipo com Stripe.Product, dizendo que é um OBJ.*/
 

@@ -35,7 +35,7 @@ export default function Product({product}:ProductProps){
       // Rota externa
       window.location.href = checkoutUrl;
     } catch (err) {
-      // Conectar com uma ferramenta de observabilidade (Datadod / Sentry)
+      // Conectar com uma ferramenta de observabilidade (Datadog / Sentry)
       console.log("err:", err)
       setIsCreatingCheckoutSession(false);
 
@@ -69,11 +69,14 @@ export default function Product({product}:ProductProps){
 
 
 
-/* Metodo que devolve os IDs que necessíta para páginas estáticas
+/* 
+Projeto: 4 seção: Produto & Checkout Aula: SSG com parâmetro dinâmico
+
+Metodo que devolve os IDs que necessíta para páginas estáticas
 o metodo retorno um OBJ, quem tem  paths: [], e dentro do array de paths tenho varios os 
 paramemtros/IDS, necessários , 
 */
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => { //Async
   return {
     paths: [
         {params: {id: 'prod_NNIaQYqGC5Bg3w'}},
@@ -83,13 +86,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 /*
+
+Projeto: 4 seção: Produto & Checkout Aula: Carregando dados do produto 5:00  Tipagem da função
+
 o GetStaticProps Recebe como parametro 
 1 º O tipo do retorno, neste caso passo any, não quer tipar, 
 2 º O Formato do Obj de params que recebemos. neste caso recebo o id do produto
 {id: string}. digo q seu formato é uma string, pois retrieve só aceita string
 mas poderia ser um obj {} vazio.
 */
-
 export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ params }) => {
   const productId = params.id;
 

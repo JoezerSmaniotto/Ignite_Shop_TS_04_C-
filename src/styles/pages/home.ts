@@ -47,20 +47,20 @@ export const Product = styled('button',{
         transition: 'all 0.2s ease-in-out',
 
         strong:{
-            fontSize: '$xl',
-            fontWeigth: 'bold',
-            color: '$green300',
+            fontSize: '$lg',
+            fontWeight: 'bold',
+            color: '$white',
         },
 
         span:{
             fontSize: '$xl',
-            fontWeigth: 'bold',
+            fontWeight: 'bold',
             color: '$green300',
         },
     },
 
 
-    '&:hover':{
+    '&:hover':{ /* Projeto: 4 seção: Estrutura Visual Aula: Estrutura da Home,20:30*/
          footer:{
             transform: 'translateY(0%)',
             opacity: 1,
